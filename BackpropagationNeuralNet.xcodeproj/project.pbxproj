@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		383880CA16F07CC400F49E37 /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383880C516F07CC400F49E37 /* IISideController.m */; };
+		383880CB16F07CC400F49E37 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383880C716F07CC400F49E37 /* IIViewDeckController.m */; };
+		383880CC16F07CC400F49E37 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383880C916F07CC400F49E37 /* IIWrapController.m */; };
 		389F976016C9131D004D9562 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F975F16C9131D004D9562 /* UIKit.framework */; };
 		389F976216C9131D004D9562 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976116C9131D004D9562 /* Foundation.framework */; };
 		389F976416C9131D004D9562 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976316C9131D004D9562 /* CoreGraphics.framework */; };
@@ -26,6 +29,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		383880C416F07CC400F49E37 /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
+		383880C516F07CC400F49E37 /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
+		383880C616F07CC400F49E37 /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		383880C716F07CC400F49E37 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
+		383880C816F07CC400F49E37 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
+		383880C916F07CC400F49E37 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
 		385516D216CC25EF00F93E92 /* testset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = testset.h; path = testset/testset.h; sourceTree = SOURCE_ROOT; };
 		385516D316CC25EF00F93E92 /* createSineTestSet.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = createSineTestSet.php; path = testset/createSineTestSet.php; sourceTree = SOURCE_ROOT; };
 		389F975C16C9131D004D9562 /* BackpropagationNeuralNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackpropagationNeuralNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,9 +79,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		383880C316F07CC400F49E37 /* ViewDeck */ = {
+			isa = PBXGroup;
+			children = (
+				383880C416F07CC400F49E37 /* IISideController.h */,
+				383880C516F07CC400F49E37 /* IISideController.m */,
+				383880C616F07CC400F49E37 /* IIViewDeckController.h */,
+				383880C716F07CC400F49E37 /* IIViewDeckController.m */,
+				383880C816F07CC400F49E37 /* IIWrapController.h */,
+				383880C916F07CC400F49E37 /* IIWrapController.m */,
+			);
+			path = ViewDeck;
+			sourceTree = "<group>";
+		};
 		389F975316C9131D004D9562 = {
 			isa = PBXGroup;
 			children = (
+				383880C316F07CC400F49E37 /* ViewDeck */,
 				389F978A16C94DA6004D9562 /* QuartzCore.framework */,
 				389F976516C9131D004D9562 /* BackpropagationNeuralNet */,
 				389F975E16C9131D004D9562 /* Frameworks */,
@@ -208,6 +231,9 @@
 				389F978816C91494004D9562 /* BackPropagationNeuralNet.cpp in Sources */,
 				38E2502316CABFF000F1CB70 /* InOutDataset.m in Sources */,
 				38E2502616CB9EF000F1CB70 /* NeuralNetTestImage.mm in Sources */,
+				383880CA16F07CC400F49E37 /* IISideController.m in Sources */,
+				383880CB16F07CC400F49E37 /* IIViewDeckController.m in Sources */,
+				383880CC16F07CC400F49E37 /* IIWrapController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
