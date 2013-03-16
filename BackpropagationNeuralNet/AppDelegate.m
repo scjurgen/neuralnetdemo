@@ -28,6 +28,8 @@
     // Override point for customization after application launch.
     
     mainViewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    mainViewController.neuronsIn=1;
+    mainViewController.neuronsOut=1;
     
     selectorController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     
@@ -76,16 +78,29 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-
+/** this should go int MainMenuViewController, together with the initializations
+ */
 - (UIViewController*)controllerForIndex:(int)index {
     switch (index) {
         case 0:
+            mainViewController.neuronsIn=1;
+            mainViewController.neuronsOut=1;
+            [mainViewController viewWillAppear:NO];
             return mainViewController;
         case 1:
+            mainViewController.neuronsIn=1;
+            mainViewController.neuronsOut=2;
+            [mainViewController viewWillAppear:NO];
             return mainViewController;
         case 2:
+            mainViewController.neuronsIn=2;
+            mainViewController.neuronsOut=1;
+            [mainViewController viewWillAppear:NO];
             return mainViewController;
         case 3:
+            mainViewController.neuronsIn=2;
+            mainViewController.neuronsOut=2;
+            [mainViewController viewWillAppear:NO];
             return mainViewController;
         case 4:
             return mainViewController;

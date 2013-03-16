@@ -51,17 +51,19 @@
 -(void)imageTest1x1
 {
     CGFloat oldy=0,oldx=0;
-    for (CGFloat x=-width; x < width; x++)
+    BOOL first=YES;
+   for (CGFloat x=-width; x < width; x+=2.0)
     {
         float inData[2];
-        inData[0]=NORMALIZEWIDTH(x);
+        inData[0]=(float)x/(float)width;
         [nnh feedForward:inData];
         CGFloat y=NORMALIZEHEIGHT([nnh outValue:0]);
         CGPoint ptFrom={oldx,oldy};
-        CGPoint ptTo={x,y};
-        if (x!=0)
+        CGPoint ptTo={(x+width)/2,y};
+        if (!first)
             [self pLine:ptFrom ptTo:ptTo factor:1 lineWidth:1.5];
-        oldx=x;
+        first=NO;
+        oldx=(x+width)/2;
         oldy=y;
     }
 }
@@ -70,7 +72,7 @@
 {
     CGFloat oldy=0,oldx=0;
     BOOL first=YES;
-    for (CGFloat x=-width; x < width; x++)
+    for (CGFloat x=-width; x < width; x+=2.0)
     {
         float inData[2];
         inData[0]=(float)x/(float)width;
@@ -95,10 +97,10 @@
         for (CGFloat x=-width; x < width; x+=10)
         {
             FP_TYPE inData[3];
-            inData[0]=NORMALIZEWIDTH(x);
-            inData[1]=NORMALIZEHEIGHT(y);
+            inData[0]=(float)x/(float)width;
+            inData[1]=(float)y/(float)height;
             [nnh feedForward:inData];
-            CGFloat z=NORMALIZEHEIGHT([nnh outValue:0]);
+            //CGFloat z=NORMALIZEHEIGHT([nnh outValue:0]);
             CGPoint ptFrom={oldx,oldy};
             CGPoint ptTo={x,y};
             [self pLine:ptFrom ptTo:ptTo factor:1 lineWidth:1.5];

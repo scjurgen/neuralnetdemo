@@ -12,7 +12,7 @@ typedef enum {
     SIG_TANHC,
 }SIG_SIGMOID;
 
-#define SIGMOID SIG_TANHC
+#define SIGMOID SIG_TANH
 
 //	initializes and allocates memory on heap
 NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):

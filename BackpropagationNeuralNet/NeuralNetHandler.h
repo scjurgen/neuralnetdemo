@@ -27,6 +27,9 @@
 @property (atomic) CGFloat threshold;
 @property (atomic) CGFloat maximumIterations;
 @property (atomic) NSInteger randomSeed;
+@property (atomic) BOOL isIterating;
+@property (atomic) BOOL stopNow;
+
 
 @property (nonatomic,strong) InOutDataset *trainDataSet;
 @property (nonatomic,strong) InOutDataset *testDataSet;

@@ -10,7 +10,7 @@
 #import "BackPropagationNeuralNet.h"
 #include <time.h>
 
-
+#define SECONDSWAIT .05
 #define MAXLAYERS 6
 
 
@@ -18,8 +18,6 @@
 {
     NSInteger layersCount;
     NSInteger realLayers[MAXLAYERS];
-    BOOL stopNow;
-    BOOL isIterating;
     NeuralNet *neuralNet;
 }
 
@@ -32,7 +30,7 @@
     self = [super self];
     if (self)
     {
-        _learningRate = 0.25;
+        _learningRate = 0.125;
         _momentum = 0.1;
         _threshold =  0.0000000001;
         _randomSeed = 5;
@@ -42,7 +40,7 @@
             realLayers[layersCount]=layers[layersCount];
             NSLog(@"%d %d", layersCount,layers[layersCount]);
         }
-        isIterating=NO;
+        _isIterating=NO;
     }
     return self;
 }
@@ -62,10 +60,10 @@
 
 - (void)dealloc
 {
-    if (isIterating)
+    if (_isIterating)
     {
-        stopNow=YES;
-        while (isIterating)
+        _stopNow=YES;
+        while (_isIterating)
         {
             sleep(1);
         }
@@ -73,18 +71,6 @@
     }
 }
 
-
-- (void)showTest
-{
-    NSString *res=@"Results:\n";
-    for (int j = 0; j < _testDataSet.setsCount; j++)
-    {
-        neuralNet->feedForward([_testDataSet dataToInputSet:j]);
-        res = [res stringByAppendingFormat:@"%4d\t%.3f %%\n",j+1, 100.0*fabs([_testDataSet dataToOutputSet:j][0]-neuralNet->outValue(0))];
-        NSLog(@"error on train: %.4f", fabs([_testDataSet dataToOutputSet:j][0]-neuralNet->outValue(0)));
-    }
-    [self.delegate showTestResult:res];
-}
 
 - (void)initializeNeuralNet
 {
@@ -130,12 +116,12 @@
     srand(_randomSeed);
     
 	CFTimeInterval showTime=CACurrentMediaTime();
-    isIterating=YES;
+    _isIterating=YES;
     long i;
 	for (i=0; i<_maximumIterations; i++)
 	{
         int idx=rand()%[_trainDataSet setsCount];
-        if (stopNow)
+        if (_stopNow)
         {
             break;
         }
@@ -151,26 +137,22 @@
             if (CACurrentMediaTime() >= showTime)
             {
                 [_delegate showProgress:[self currentError] iterations:i];
-                showTime=CACurrentMediaTime()+.2;
+                showTime=CACurrentMediaTime()+SECONDSWAIT;
                 iterationDelta = i-lastDelta;
                 lastDelta=i;
                 testResultShow++;
                 if (testResultShow%2==0)
                 {
-                    if (!stopNow)
+                    if (!_stopNow)
                     {
-                        [self showTest];
+                        
                         [self.delegate showAsImage:self];
                     }
                 }
             }
         }
 	}
-	if (!stopNow)
-    {
-        [self showTest];
-    }
-    isIterating=NO;
+    _isIterating=NO;
 }
 
 @end

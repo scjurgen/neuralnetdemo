@@ -27,6 +27,12 @@
     testImage = [[NeuralNetTestImage alloc]init];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    _inputNeurons.text = [NSString stringWithFormat:@"%d", _neuronsIn];
+    _outputNeurons.text = [NSString stringWithFormat:@"%d", _neuronsOut];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -101,7 +107,71 @@
 
 
 - (IBAction)runAction:(id)sender {
-    [self runNet];
+    BOOL startAction=YES;
+    if (neuralNet!=nil)
+    {
+        if ([neuralNet isIterating])
+        {
+            startAction=NO;
+        }
+    }
+    if (startAction)
+    {
+        [_runButton setTitle:@"Stop" forState:UIControlStateNormal];
+        [self runNet];
+    }
+    else
+    {
+        [_runButton setTitle:@"Start" forState:UIControlStateNormal];
+        [neuralNet setStopNow:YES];
+    }
+}
+
+
+- (IBAction)resetSimulationData:(id)sender {
+    NSMutableString *testData=[[NSMutableString alloc]init];
+    float sine1=[_sine1Label.text floatValue];
+    float sine2=[_sine2Label.text floatValue];
+    
+    if (_neuronsIn==1 && _neuronsOut==2)
+    {
+        float facx=3.1415926535897931*sine1;
+        float facy=3.1415926535897931*sine2;
+        float scale=0.6;
+        float yscale=0.0;
+        float step=0.1;
+        float a,x,y;
+        for (a=-1.0; a <= 1.0; a+=step)
+        {
+            x=(sin(a * facx)+yscale)/(scale*2.0);
+            y=(cos(a * facy)+yscale)/(scale*2.0);
+            [testData appendFormat:@"%f,%f,%f\n",a,x,y];
+        }
+        a=1.0;
+        x = (sin(a * facx)+yscale)/(scale*2.0);
+        y =(cos(a * facy)+yscale)/(scale*2.0);
+        [testData appendFormat:@"%f,%f,%f\n",a,x,y];
+    }
+    if (_neuronsIn==1 && _neuronsOut==1)
+    {
+        float facx=3.1415926535897931*sine1;
+        float facy=3.1415926535897931*sine2;
+        float scale=0.6;
+        float yscale=0.0;
+        float step=0.1;
+        float a,x,y;
+        for (a=-1.0; a <= 1.0; a+=step)
+        {
+            x=(sin(a * facx)+yscale)/(scale*2.0);
+            y=(cos(a * facy)+yscale)/(scale*2.0);
+            [testData appendFormat:@"%f,%f\n",a,x];
+        }
+        a=1.0;
+        x = (sin(a * facx)+yscale)/(scale*2.0);
+        //y =(cos(a * facy)+yscale)/(scale*2.0);
+        [testData appendFormat:@"%f,%f\n",a,x];
+    }
+    _dataSet.text=testData;
     
 }
 @end
