@@ -3,7 +3,7 @@
     $fp=fopen("testset.h","w");
     fprintf($fp,"#define TESTSET @\"");
     $facx=3.1415926*3.0;
-    $facy=3.1415926*5.0;
+    $facy=3.1415926*1.9;
     $scale=0.9;
     $yscale=0.0;
     $step=0.1;

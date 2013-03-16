@@ -10,6 +10,11 @@
 		383880CA16F07CC400F49E37 /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383880C516F07CC400F49E37 /* IISideController.m */; };
 		383880CB16F07CC400F49E37 /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383880C716F07CC400F49E37 /* IIViewDeckController.m */; };
 		383880CC16F07CC400F49E37 /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383880C916F07CC400F49E37 /* IIWrapController.m */; };
+		383C536B16F485E0004BF9F6 /* MainNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383C536A16F485E0004BF9F6 /* MainNavigationViewController.m */; };
+		383C537216F4860B004BF9F6 /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383C536D16F4860B004BF9F6 /* MainMenuViewController.m */; };
+		383C537316F4860B004BF9F6 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383C536E16F4860B004BF9F6 /* MainMenuViewController.xib */; };
+		383C537416F4860B004BF9F6 /* MainMenuCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 383C537016F4860B004BF9F6 /* MainMenuCustomCell.m */; };
+		383C537516F4860B004BF9F6 /* MainMenuCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383C537116F4860B004BF9F6 /* MainMenuCustomCell.xib */; };
 		389F976016C9131D004D9562 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F975F16C9131D004D9562 /* UIKit.framework */; };
 		389F976216C9131D004D9562 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976116C9131D004D9562 /* Foundation.framework */; };
 		389F976416C9131D004D9562 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976316C9131D004D9562 /* CoreGraphics.framework */; };
@@ -35,6 +40,14 @@
 		383880C716F07CC400F49E37 /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		383880C816F07CC400F49E37 /* IIWrapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIWrapController.h; sourceTree = "<group>"; };
 		383880C916F07CC400F49E37 /* IIWrapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIWrapController.m; sourceTree = "<group>"; };
+		383C536916F485E0004BF9F6 /* MainNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationViewController.h; sourceTree = "<group>"; };
+		383C536A16F485E0004BF9F6 /* MainNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationViewController.m; sourceTree = "<group>"; };
+		383C536C16F4860B004BF9F6 /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		383C536D16F4860B004BF9F6 /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		383C536E16F4860B004BF9F6 /* MainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
+		383C536F16F4860B004BF9F6 /* MainMenuCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuCustomCell.h; sourceTree = "<group>"; };
+		383C537016F4860B004BF9F6 /* MainMenuCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuCustomCell.m; sourceTree = "<group>"; };
+		383C537116F4860B004BF9F6 /* MainMenuCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuCustomCell.xib; sourceTree = "<group>"; };
 		385516D216CC25EF00F93E92 /* testset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = testset.h; path = testset/testset.h; sourceTree = SOURCE_ROOT; };
 		385516D316CC25EF00F93E92 /* createSineTestSet.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; name = createSineTestSet.php; path = testset/createSineTestSet.php; sourceTree = SOURCE_ROOT; };
 		389F975C16C9131D004D9562 /* BackpropagationNeuralNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackpropagationNeuralNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +146,14 @@
 				389F977716C9131D004D9562 /* ViewController.h */,
 				389F977816C9131D004D9562 /* ViewController.m */,
 				389F977A16C9131D004D9562 /* ViewController.xib */,
+				383C536916F485E0004BF9F6 /* MainNavigationViewController.h */,
+				383C536A16F485E0004BF9F6 /* MainNavigationViewController.m */,
+				383C536C16F4860B004BF9F6 /* MainMenuViewController.h */,
+				383C536D16F4860B004BF9F6 /* MainMenuViewController.m */,
+				383C536E16F4860B004BF9F6 /* MainMenuViewController.xib */,
+				383C536F16F4860B004BF9F6 /* MainMenuCustomCell.h */,
+				383C537016F4860B004BF9F6 /* MainMenuCustomCell.m */,
+				383C537116F4860B004BF9F6 /* MainMenuCustomCell.xib */,
 				389F976616C9131D004D9562 /* Supporting Files */,
 				389F978216C91459004D9562 /* NeuralNetHandler.h */,
 				389F978316C91459004D9562 /* NeuralNetHandler.mm */,
@@ -214,6 +235,8 @@
 				389F977416C9131D004D9562 /* Default@2x.png in Resources */,
 				389F977616C9131D004D9562 /* Default-568h@2x.png in Resources */,
 				389F977C16C9131D004D9562 /* ViewController.xib in Resources */,
+				383C537316F4860B004BF9F6 /* MainMenuViewController.xib in Resources */,
+				383C537516F4860B004BF9F6 /* MainMenuCustomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +257,9 @@
 				383880CA16F07CC400F49E37 /* IISideController.m in Sources */,
 				383880CB16F07CC400F49E37 /* IIViewDeckController.m in Sources */,
 				383880CC16F07CC400F49E37 /* IIWrapController.m in Sources */,
+				383C536B16F485E0004BF9F6 /* MainNavigationViewController.m in Sources */,
+				383C537216F4860B004BF9F6 /* MainMenuViewController.m in Sources */,
+				383C537416F4860B004BF9F6 /* MainMenuCustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

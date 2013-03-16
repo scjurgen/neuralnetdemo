@@ -12,7 +12,7 @@ typedef enum {
     SIG_TANHC,
 }SIG_SIGMOID;
 
-#define SIGMOID SIG_TANH
+#define SIGMOID SIG_TANHC
 
 //	initializes and allocates memory on heap
 NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):
@@ -65,12 +65,12 @@ NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):
 			for(int k=0;k<lsize[i-1]+1;k++)
             {
                 
-                FP_TYPE val=((FP_TYPE)rand()/RAND_MAX)/2.0-0.25;
-                if (val < 0.0)
+                FP_TYPE val=((FP_TYPE)rand()/RAND_MAX)/1.0-0.5;
+                /*if (val < 0.0)
                     val-=0.5;
                 else
                     val+=0.5;
-                
+                */
                 printf("%f ",val);
 				weight[i][j][k]=val;
             }

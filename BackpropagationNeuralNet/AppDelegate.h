@@ -16,4 +16,6 @@
 
 @property (strong, nonatomic) ViewController *viewController;
 
+- (UIViewController*)controllerForIndex:(int)index;
+
 @end

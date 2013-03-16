@@ -43,16 +43,20 @@
     CGContextStrokePath(ctx);
 }
 
+#define NORMALIZEHEIGHT(x) (((FP_TYPE)(x)+1.0)*(FP_TYPE)height/2.0)
+
+#define NORMALIZEWIDTH(x) (((FP_TYPE)(x)+1.0)*(FP_TYPE)width/2.0)
+
 
 -(void)imageTest1x1
 {
     CGFloat oldy=0,oldx=0;
-    for (CGFloat x=0; x < width; x++)
+    for (CGFloat x=-width; x < width; x++)
     {
         float inData[2];
-        inData[0]=(float)x/(float)width;
+        inData[0]=NORMALIZEWIDTH(x);
         [nnh feedForward:inData];
-        CGFloat y=[nnh outValue:0]*height;
+        CGFloat y=NORMALIZEHEIGHT([nnh outValue:0]);
         CGPoint ptFrom={oldx,oldy};
         CGPoint ptTo={x,y};
         if (x!=0)
@@ -65,17 +69,19 @@
 -(void)imageTest1x2
 {
     CGFloat oldy=0,oldx=0;
-    for (CGFloat x=0; x < width; x++)
+    BOOL first=YES;
+    for (CGFloat x=-width; x < width; x++)
     {
         float inData[2];
         inData[0]=(float)x/(float)width;
         [nnh feedForward:inData];
-        CGFloat xr=[nnh outValue:0]*height;
-        CGFloat y=[nnh outValue:1]*height;
+        CGFloat xr=NORMALIZEWIDTH([nnh outValue:0]);
+        CGFloat y=NORMALIZEHEIGHT([nnh outValue:1]);
         CGPoint ptFrom={oldx,oldy};
         CGPoint ptTo={xr,y};
-        if (x!=0)
+        if (!first)
             [self pLine:ptFrom ptTo:ptTo factor:1 lineWidth:1.5];
+        first=NO;
         oldx=xr;
         oldy=y;
     }
@@ -84,15 +90,15 @@
 -(void)imageTest2x1
 {
     CGFloat oldy=0,oldx=0;
-    for (CGFloat y=0; y < height; y+=10)
+    for (CGFloat y=-height; y < height; y+=10)
     {
-        for (CGFloat x=0; x < width; x+=10)
+        for (CGFloat x=-width; x < width; x+=10)
         {
             FP_TYPE inData[3];
-            inData[0]=(FP_TYPE)x/(FP_TYPE)width;
-            inData[1]=(FP_TYPE)y/(FP_TYPE)height;
+            inData[0]=NORMALIZEWIDTH(x);
+            inData[1]=NORMALIZEHEIGHT(y);
             [nnh feedForward:inData];
-            CGFloat z=[nnh outValue:0]*height;
+            CGFloat z=NORMALIZEHEIGHT([nnh outValue:0]);
             CGPoint ptFrom={oldx,oldy};
             CGPoint ptTo={x,y};
             [self pLine:ptFrom ptTo:ptTo factor:1 lineWidth:1.5];
@@ -106,8 +112,8 @@
 {
     for (int i=0; i < [[nnh trainDataSet] setsCount]; i++)
     {
-        CGFloat x=(FP_TYPE)[[nnh trainDataSet] dataToInputSet:i][0]*(FP_TYPE)width;
-        CGFloat y=(FP_TYPE)[[nnh trainDataSet] dataToOutputSet:i][0]*(FP_TYPE)height;
+        CGFloat x=NORMALIZEWIDTH([[nnh trainDataSet] dataToInputSet:i][0]);
+        CGFloat y=NORMALIZEHEIGHT([[nnh trainDataSet] dataToOutputSet:i][0]);
         CGPoint ptFrom={x,y};
         CGPoint ptTo={x,y+1};
         [self pLine:ptFrom ptTo:ptTo factor:1 lineWidth:5.0];
@@ -121,8 +127,8 @@
     CGFloat oldx,oldy;
     for (int i=0; i < [[nnh trainDataSet] setsCount]; i++)
     {
-        CGFloat x=(FP_TYPE)[[nnh trainDataSet] dataToOutputSet:i][0]*(FP_TYPE)width;
-        CGFloat y=(FP_TYPE)[[nnh trainDataSet] dataToOutputSet:i][1]*(FP_TYPE)height;
+        CGFloat x=NORMALIZEWIDTH([[nnh trainDataSet] dataToOutputSet:i][0]);
+        CGFloat y=NORMALIZEHEIGHT([[nnh trainDataSet] dataToOutputSet:i][1]);
         CGPoint ptFrom={oldx,oldy};
         CGPoint ptTo={x,y};
         if (i!=0)

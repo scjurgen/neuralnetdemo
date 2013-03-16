@@ -7,17 +7,44 @@
 //
 
 #import "AppDelegate.h"
+#import "IIViewDeckController.h"
+#import "IIWrapController.h"
 
 #import "ViewController.h"
+#import "MainNavigationViewController.h"
+#import "MainMenuViewController.h"
 
+@interface AppDelegate()
+{
+    ViewController *mainViewController;
+    UIViewController *selectorController;
+}
+@end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    
+    mainViewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
+    
+    selectorController = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+    
+    IIViewDeckController* deckController = [[IIViewDeckController alloc] initWithCenterViewController:mainViewController
+                                                                                   leftViewController:selectorController];
+    deckController.automaticallyUpdateTabBarItems = YES;
+    deckController.navigationControllerBehavior = IIViewDeckNavigationControllerIntegrated;
+    deckController.rightSize = [UIScreen mainScreen].bounds.size.width;
+    deckController.maxSize = [UIScreen mainScreen].bounds.size.width;
+    deckController.openSlideAnimationDuration = 0.25f;
+    deckController.closeSlideAnimationDuration = 0.5f;
+    
+    MainNavigationViewController * navigationController = [[MainNavigationViewController alloc] initWithRootViewController:deckController];
+    IIWrapController*wrapController = [[IIWrapController alloc] initWithViewController:navigationController];
+    self.window.rootViewController = wrapController;
+    
+    self.window.backgroundColor = [UIColor darkGrayColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -47,6 +74,26 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+- (UIViewController*)controllerForIndex:(int)index {
+    switch (index) {
+        case 0:
+            return mainViewController;
+        case 1:
+            return mainViewController;
+        case 2:
+            return mainViewController;
+        case 3:
+            return mainViewController;
+        case 4:
+            return mainViewController;
+        default:
+            NSAssert(0,@"Index of controllers out of range");
+            break;
+    }
+    return nil;
 }
 
 @end
