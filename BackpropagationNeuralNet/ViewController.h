@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *outputNeurons;
 @property (weak, nonatomic) IBOutlet UITextField *sine1Label;
 @property (weak, nonatomic) IBOutlet UITextField *sine2Label;
+@property (weak, nonatomic) IBOutlet UISwitch *clipValues;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sigmoidControl;
+- (IBAction)sigmoidSelect:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *runButton;
 - (IBAction)resetSimulationData:(id)sender;

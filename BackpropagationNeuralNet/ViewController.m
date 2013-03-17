@@ -8,13 +8,13 @@
 
 #import "ViewController.h"
 #import "NeuralNetTestImage.h"
-#import "../testset/testset.h"
 
 
 @interface ViewController ()
 {
     NeuralNetTestImage *testImage;
     NeuralNetHandler *neuralNet;
+    
 }
 @end
 
@@ -23,7 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _dataSet.text = TESTSET;
+    [self resetSimulationData:self];
     testImage = [[NeuralNetTestImage alloc]init];
 }
 
@@ -127,11 +127,21 @@
     }
 }
 
+- (float)clipValue:(float)value
+{
+    if (value < -0.5)
+        return -1.0;
+    if (value > 0.5)
+        return 1.0;
+    return 0.0;
+}
+
 
 - (IBAction)resetSimulationData:(id)sender {
     NSMutableString *testData=[[NSMutableString alloc]init];
     float sine1=[_sine1Label.text floatValue];
     float sine2=[_sine2Label.text floatValue];
+    BOOL clipValues=[_clipValues isOn];
     
     if (_neuronsIn==1 && _neuronsOut==2)
     {
@@ -145,33 +155,46 @@
         {
             x=(sin(a * facx)+yscale)/(scale*2.0);
             y=(cos(a * facy)+yscale)/(scale*2.0);
-            [testData appendFormat:@"%f,%f,%f\n",a,x,y];
+            if (clipValues)
+            {
+	            x=[self clipValue:x];
+    	        y=[self clipValue:y];
+            }
+            [testData appendFormat:@"%1f,%1f,%1f\n",a,x,y];
         }
         a=1.0;
-        x = (sin(a * facx)+yscale)/(scale*2.0);
-        y =(cos(a * facy)+yscale)/(scale*2.0);
-        [testData appendFormat:@"%f,%f,%f\n",a,x,y];
+        if (clipValues)
+        {
+       	 	x = (sin(a * facx)+yscale)/(scale*2.0);
+        	y =(cos(a * facy)+yscale)/(scale*2.0);
+        }
+        x=[self clipValue:x];
+        y=[self clipValue:y];
+        [testData appendFormat:@"%1f,%1f,%1f\n",a,x,y];
     }
     if (_neuronsIn==1 && _neuronsOut==1)
     {
         float facx=3.1415926535897931*sine1;
-        float facy=3.1415926535897931*sine2;
         float scale=0.6;
         float yscale=0.0;
         float step=0.1;
-        float a,x,y;
+        float a,x;
         for (a=-1.0; a <= 1.0; a+=step)
         {
             x=(sin(a * facx)+yscale)/(scale*2.0);
-            y=(cos(a * facy)+yscale)/(scale*2.0);
-            [testData appendFormat:@"%f,%f\n",a,x];
+            if (clipValues)
+	            x=[self clipValue:x];
+            [testData appendFormat:@"%1f,%1f\n",a,x];
         }
         a=1.0;
         x = (sin(a * facx)+yscale)/(scale*2.0);
-        //y =(cos(a * facy)+yscale)/(scale*2.0);
-        [testData appendFormat:@"%f,%f\n",a,x];
+        if (clipValues)
+        	x=[self clipValue:x];
+        [testData appendFormat:@"%1f,%1f\n",a,x];
     }
     _dataSet.text=testData;
     
+}
+- (IBAction)sigmoidSelect:(id)sender {
 }
 @end

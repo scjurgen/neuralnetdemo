@@ -159,7 +159,6 @@
     
     CGContextSetRGBStrokeColor(ctx,0,0,0,1);
     
-    CGFloat oldy=0,oldx=0;
     // show testset
     switch ([[nnh trainDataSet] inputNeurons])
     {

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "BackPropagationNeuralNet.h"
+#include "sigmoids.h"
 #import "InOutDataset.h"
 
 @class NeuralNetHandler;
@@ -29,6 +29,7 @@
 @property (atomic) NSInteger randomSeed;
 @property (atomic) BOOL isIterating;
 @property (atomic) BOOL stopNow;
+@property (atomic) SIG_SIGMOID sigmoid;
 
 
 @property (nonatomic,strong) InOutDataset *trainDataSet;

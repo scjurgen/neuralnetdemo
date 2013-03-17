@@ -30,6 +30,7 @@
     self = [super self];
     if (self)
     {
+        _sigmoid=SIG_TANHC;
         _learningRate = 0.125;
         _momentum = 0.1;
         _threshold =  0.0000000001;
@@ -77,6 +78,7 @@
     if (neuralNet)
         delete neuralNet;
     neuralNet = new NeuralNet(layersCount, realLayers, _learningRate, _momentum);
+    neuralNet->setSigFunc(_sigmoid);
 }
 
 
@@ -138,14 +140,13 @@
             {
                 [_delegate showProgress:[self currentError] iterations:i];
                 showTime=CACurrentMediaTime()+SECONDSWAIT;
-                iterationDelta = i-lastDelta;
+                iterationDelta = i-lastDelta; // relaxed checkback on data
                 lastDelta=i;
                 testResultShow++;
                 if (testResultShow%2==0)
                 {
                     if (!_stopNow)
                     {
-                        
                         [self.delegate showAsImage:self];
                     }
                 }

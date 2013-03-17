@@ -6,13 +6,11 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef enum {
-    SIG_EXP,
-    SIG_TANH,
-    SIG_TANHC,
-}SIG_SIGMOID;
+void NeuralNet::setSigFunc(SIG_SIGMOID sig)
+{
+    this->sigFunc=sig;
+}
 
-#define SIGMOID SIG_TANH
 
 //	initializes and allocates memory on heap
 NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):
@@ -20,6 +18,7 @@ NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):
 {
 	layersCount=nl;
 	lsize=new int[layersCount];
+    sigFunc=SIG_TANHC;
 
 	for(int i=0;i<layersCount;i++){
 		lsize[i]=sz[i];
@@ -48,15 +47,15 @@ NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):
 		}
 	}
 
-	prevDwt = new FP_TYPE**[layersCount];
+	prevDwij = new FP_TYPE**[layersCount];
 
 	for(int i=1;i<layersCount;i++){
-		prevDwt[i]=new FP_TYPE*[lsize[i]];
+		prevDwij[i]=new FP_TYPE*[lsize[i]];
 
 	}
 	for(int i=1;i<layersCount;i++){
 		for(int j=0;j<lsize[i];j++){
-			prevDwt[i][j]=new FP_TYPE[lsize[i-1]+1];
+			prevDwij[i][j]=new FP_TYPE[lsize[i-1]+1];
 		}
 	}
 
@@ -66,11 +65,11 @@ NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):
             {
                 
                 FP_TYPE val=((FP_TYPE)rand()/RAND_MAX)/1.0-0.5;
-                /*if (val < 0.0)
+                if (val < 0.0)
                     val-=0.5;
                 else
                     val+=0.5;
-                */
+                
                 printf("%f ",val);
 				weight[i][j][k]=val;
             }
@@ -82,7 +81,7 @@ NeuralNet::NeuralNet(int nl, int *sz, FP_TYPE learningRate, FP_TYPE momentum):
 		{
             for(int k=0;k<lsize[i-1]+1;k++)
             {
-                prevDwt[i][j][k]=(FP_TYPE)0.0;
+                prevDwij[i][j][k]=(FP_TYPE)0.0;
             }
         }
     }
@@ -109,10 +108,10 @@ NeuralNet::~NeuralNet()
 
 	for(int i=1;i<layersCount;i++)
 		for(int j=0;j<lsize[i];j++)
-			delete[] prevDwt[i][j];
+			delete[] prevDwij[i][j];
 	for(int i=1;i<layersCount;i++)
-		delete[] prevDwt[i];
-	delete[] prevDwt;
+		delete[] prevDwij[i];
+	delete[] prevDwij;
 
 	delete[] lsize;
 }
@@ -121,7 +120,7 @@ NeuralNet::~NeuralNet()
 //	sigmoid function
 FP_TYPE NeuralNet::sigmoid(FP_TYPE x)
 {
-    switch(SIGMOID)
+    switch(sigFunc)
     {
         case SIG_TANH:
             return (FP_TYPE)tanh(x);
@@ -135,7 +134,7 @@ FP_TYPE NeuralNet::sigmoid(FP_TYPE x)
 
 FP_TYPE NeuralNet::derivateSigmoid(FP_TYPE x)
 {
-    switch(SIGMOID)
+    switch(sigFunc)
     {
         case SIG_TANH:
             return (FP_TYPE)(1.0-x*x);
@@ -154,7 +153,7 @@ FP_TYPE NeuralNet::mse(FP_TYPE *tgt)
 	for(int i=0;i<lsize[layersCount-1];i++){
 		mse+=(tgt[i]-outputNeuron[layersCount-1][i])*(tgt[i]-outputNeuron[layersCount-1][i]);
 	}
-	return mse/2;
+	return mse/2.0;
 }
 
 
@@ -199,7 +198,7 @@ void NeuralNet::backPropagate(FP_TYPE *in,FP_TYPE *tgt)
 		delta[layersCount-1][i]=derivateSigmoid(v)*(tgt[i]-v);
 	}
 
-	//	find delta for hidden layers	
+		
 	for(int i=layersCount-2;i>0;i--)
     {
 		for(int j=0;j<lsize[i];j++)
@@ -209,35 +208,43 @@ void NeuralNet::backPropagate(FP_TYPE *in,FP_TYPE *tgt)
             {
 				sumerror += delta[i+1][k]*weight[i+1][k][j];
 			}
-			delta[i][j] = derivateSigmoid(outputNeuron[i][j])*sumerror;
+			delta[i][j] = derivateSigmoid(outputNeuron[i][j])*sumerror; //	delta in hidden layer
 		}
 	}
 
-	//	apply momentum ( does nothing if momentum=0 )
+	
 	for(int i=1;i<layersCount;i++)
     {
 		for(int j=0; j<lsize[i]; j++)
         {
 			for(int k=0; k<lsize[i-1]; k++)
             {
-				weight[i][j][k] += momentum*prevDwt[i][j][k];
+				weight[i][j][k] += momentum*prevDwij[i][j][k];
 			}
-			weight[i][j][lsize[i-1]] += momentum*prevDwt[i][j][lsize[i-1]];
+			weight[i][j][lsize[i-1]] += momentum*prevDwij[i][j][lsize[i-1]];
+            //	apply momentum
 		}
 	}
 
-	//	adjust weights usng steepest descent	
+	
 	for(int i=1;i<layersCount;i++)
     {
 		for(int j=0;j<lsize[i];j++)
         {
 			for(int k=0;k<lsize[i-1];k++)
             {
-				prevDwt[i][j][k]=learningRate*delta[i][j]*outputNeuron[i-1][k];
-				weight[i][j][k]+=prevDwt[i][j][k];
+                //	adjust weights with steepest descent
+				prevDwij[i][j][k]=learningRate*delta[i][j]*outputNeuron[i-1][k];
+				weight[i][j][k]+=prevDwij[i][j][k];
 			}
-			prevDwt[i][j][lsize[i-1]]=learningRate*delta[i][j];
-			weight[i][j][lsize[i-1]]+=prevDwt[i][j][lsize[i-1]];
+			prevDwij[i][j][lsize[i-1]]=learningRate*delta[i][j];
+			weight[i][j][lsize[i-1]]+=prevDwij[i][j][lsize[i-1]];
+            
+            
+            //delta wij(t)=decay(learningrate delta(i) Xi)+momentum * delta wij(t-1)
+            // wij(t+1) = wij(t)+delta wij(t)
+            
+            
 		}
 	}
 }
@@ -279,7 +286,7 @@ bool NeuralNet::saveState(char *fname)
 		for(int j=0;j<lsize[i];j++)
 			for(int k=0;k<lsize[i-1]+1;k++)
 			{
-				fwrite(&prevDwt[i][j][k],1,sizeof(prevDwt[i][j][k]),fp);
+				fwrite(&prevDwij[i][j][k],1,sizeof(prevDwij[i][j][k]),fp);
 			}
 	fclose(fp);
     
@@ -306,7 +313,7 @@ bool NeuralNet::saveState(char *fname)
 		for(int j=0;j<lsize[i];j++)
 			for(int k=0;k<lsize[i-1]+1;k++)
 			{
-				fprintf(fp,"pw[%d][%d][%d]=%f\n",i,j,k,prevDwt[i][j][k]);
+				fprintf(fp,"pw[%d][%d][%d]=%f\n",i,j,k,prevDwij[i][j][k]);
 			}
 	fclose(fp);
 #endif
@@ -353,7 +360,7 @@ bool NeuralNet::loadState(char *fname)
 		for(int j=0;j<lsize[i];j++)
 			for(int k=0;k<lsize[i-1]+1;k++)
 			{
-				fread(&prevDwt[i][j][k],1,sizeof(prevDwt[i][j][k]),fp);
+				fread(&prevDwij[i][j][k],1,sizeof(prevDwij[i][j][k]),fp);
 			}
 	fclose(fp);
 	return true;
