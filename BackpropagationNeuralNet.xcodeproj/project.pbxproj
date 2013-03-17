@@ -17,6 +17,14 @@
 		383C537516F4860B004BF9F6 /* MainMenuCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383C537116F4860B004BF9F6 /* MainMenuCustomCell.xib */; };
 		386D7C1016F5C848008F516B /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 386D7C0F16F5C848008F516B /* ImageHelper.m */; };
 		386D7C1216F5CA5F008F516B /* 500.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C1116F5CA5F008F516B /* 500.png */; };
+		386D7C1D16F6260D008F516B /* neuon1in1out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C1C16F6260D008F516B /* neuon1in1out@2x.png */; };
+		386D7C1F16F62621008F516B /* neuon1in1out.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C1E16F62621008F516B /* neuon1in1out.png */; };
+		386D7C2616F627EF008F516B /* neuon1in1out.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C2016F627EF008F516B /* neuon1in1out.png */; };
+		386D7C2716F627EF008F516B /* neuon1in1out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C2116F627EF008F516B /* neuon1in1out@2x.png */; };
+		386D7C2816F627EF008F516B /* neuon1in2out.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C2216F627EF008F516B /* neuon1in2out.png */; };
+		386D7C2916F627EF008F516B /* neuon1in2out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C2316F627EF008F516B /* neuon1in2out@2x.png */; };
+		386D7C2A16F627EF008F516B /* neuon2in1out.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C2416F627EF008F516B /* neuon2in1out.png */; };
+		386D7C2B16F627EF008F516B /* neuon2in1out@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C2516F627EF008F516B /* neuon2in1out@2x.png */; };
 		389F976016C9131D004D9562 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F975F16C9131D004D9562 /* UIKit.framework */; };
 		389F976216C9131D004D9562 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976116C9131D004D9562 /* Foundation.framework */; };
 		389F976416C9131D004D9562 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976316C9131D004D9562 /* CoreGraphics.framework */; };
@@ -60,6 +68,14 @@
 		386D7C1916F620F7008F516B /* exampleset1in2out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleset1in2out.png; sourceTree = "<group>"; };
 		386D7C1A16F620F7008F516B /* exampleset2in1out_v.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleset2in1out_v.png; sourceTree = "<group>"; };
 		386D7C1B16F620F7008F516B /* exampleset2in1out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleset2in1out.png; sourceTree = "<group>"; };
+		386D7C1C16F6260D008F516B /* neuon1in1out@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neuon1in1out@2x.png"; sourceTree = "<group>"; };
+		386D7C1E16F62621008F516B /* neuon1in1out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neuon1in1out.png; sourceTree = "<group>"; };
+		386D7C2016F627EF008F516B /* neuon1in1out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neuon1in1out.png; sourceTree = "<group>"; };
+		386D7C2116F627EF008F516B /* neuon1in1out@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neuon1in1out@2x.png"; sourceTree = "<group>"; };
+		386D7C2216F627EF008F516B /* neuon1in2out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neuon1in2out.png; sourceTree = "<group>"; };
+		386D7C2316F627EF008F516B /* neuon1in2out@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neuon1in2out@2x.png"; sourceTree = "<group>"; };
+		386D7C2416F627EF008F516B /* neuon2in1out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = neuon2in1out.png; sourceTree = "<group>"; };
+		386D7C2516F627EF008F516B /* neuon2in1out@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "neuon2in1out@2x.png"; sourceTree = "<group>"; };
 		389F975C16C9131D004D9562 /* BackpropagationNeuralNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackpropagationNeuralNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		389F975F16C9131D004D9562 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		389F976116C9131D004D9562 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -193,6 +209,14 @@
 		389F976616C9131D004D9562 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				386D7C2016F627EF008F516B /* neuon1in1out.png */,
+				386D7C2116F627EF008F516B /* neuon1in1out@2x.png */,
+				386D7C2216F627EF008F516B /* neuon1in2out.png */,
+				386D7C2316F627EF008F516B /* neuon1in2out@2x.png */,
+				386D7C2416F627EF008F516B /* neuon2in1out.png */,
+				386D7C2516F627EF008F516B /* neuon2in1out@2x.png */,
+				386D7C1E16F62621008F516B /* neuon1in1out.png */,
+				386D7C1C16F6260D008F516B /* neuon1in1out@2x.png */,
 				386D7C1116F5CA5F008F516B /* 500.png */,
 				389F976716C9131D004D9562 /* BackpropagationNeuralNet-Info.plist */,
 				389F976816C9131D004D9562 /* InfoPlist.strings */,
@@ -264,6 +288,14 @@
 				383C537316F4860B004BF9F6 /* MainMenuViewController.xib in Resources */,
 				383C537516F4860B004BF9F6 /* MainMenuCustomCell.xib in Resources */,
 				386D7C1216F5CA5F008F516B /* 500.png in Resources */,
+				386D7C1D16F6260D008F516B /* neuon1in1out@2x.png in Resources */,
+				386D7C1F16F62621008F516B /* neuon1in1out.png in Resources */,
+				386D7C2616F627EF008F516B /* neuon1in1out.png in Resources */,
+				386D7C2716F627EF008F516B /* neuon1in1out@2x.png in Resources */,
+				386D7C2816F627EF008F516B /* neuon1in2out.png in Resources */,
+				386D7C2916F627EF008F516B /* neuon1in2out@2x.png in Resources */,
+				386D7C2A16F627EF008F516B /* neuon2in1out.png in Resources */,
+				386D7C2B16F627EF008F516B /* neuon2in1out@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
