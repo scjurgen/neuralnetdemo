@@ -10,10 +10,10 @@ There are 3 different kinds with different representation which you can access o
 
 
 
-All generate testdata by using a simple sine generator generating a simple wave or in the 2-dimensional case a starting lissajous pattern.
+You can generate testdata by using a simple sine generator creating a simple wave or in the 2-dimensional case a starting lissajous pattern.
 The higher the values of the sine generator the more 'chaotic' the training points. 
 The more chaotic the more neurons you will need to match the pattern.
-
+You can edit also the points (I would consider pasting though ;-) ).
 
 ##1 input, 1 output
  a single input from -1 to 1 (x) will drive the y coordinate
