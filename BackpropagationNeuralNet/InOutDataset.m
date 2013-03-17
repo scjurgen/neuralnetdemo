@@ -38,7 +38,7 @@
         _outputNeurons = outputNeurons;
         if (itemsPerRow != inputNeurons+outputNeurons)
         {
-            NSString *msg = [NSString stringWithFormat:@"Neurons count doesn't match input/output: %d != %d+%d",itemsPerRow,inputNeurons,outputNeurons];
+            NSString *msg = [NSString stringWithFormat:@"Neurons count doesn't match input/output: %d != %d+%d.\nTry the reset button to create a valid set.",itemsPerRow,inputNeurons,outputNeurons];
             
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"configuration error" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
             [alert show];
