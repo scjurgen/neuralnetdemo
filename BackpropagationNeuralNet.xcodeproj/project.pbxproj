@@ -15,6 +15,8 @@
 		383C537316F4860B004BF9F6 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383C536E16F4860B004BF9F6 /* MainMenuViewController.xib */; };
 		383C537416F4860B004BF9F6 /* MainMenuCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 383C537016F4860B004BF9F6 /* MainMenuCustomCell.m */; };
 		383C537516F4860B004BF9F6 /* MainMenuCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383C537116F4860B004BF9F6 /* MainMenuCustomCell.xib */; };
+		386D7C1016F5C848008F516B /* ImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 386D7C0F16F5C848008F516B /* ImageHelper.m */; };
+		386D7C1216F5CA5F008F516B /* 500.png in Resources */ = {isa = PBXBuildFile; fileRef = 386D7C1116F5CA5F008F516B /* 500.png */; };
 		389F976016C9131D004D9562 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F975F16C9131D004D9562 /* UIKit.framework */; };
 		389F976216C9131D004D9562 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976116C9131D004D9562 /* Foundation.framework */; };
 		389F976416C9131D004D9562 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F976316C9131D004D9562 /* CoreGraphics.framework */; };
@@ -49,6 +51,9 @@
 		383C536F16F4860B004BF9F6 /* MainMenuCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuCustomCell.h; sourceTree = "<group>"; };
 		383C537016F4860B004BF9F6 /* MainMenuCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuCustomCell.m; sourceTree = "<group>"; };
 		383C537116F4860B004BF9F6 /* MainMenuCustomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuCustomCell.xib; sourceTree = "<group>"; };
+		386D7C0E16F5C848008F516B /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
+		386D7C0F16F5C848008F516B /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
+		386D7C1116F5CA5F008F516B /* 500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 500.png; sourceTree = "<group>"; };
 		389F975C16C9131D004D9562 /* BackpropagationNeuralNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackpropagationNeuralNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		389F975F16C9131D004D9562 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		389F976116C9131D004D9562 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +109,24 @@
 			path = ViewDeck;
 			sourceTree = "<group>";
 		};
+		386D7C1316F5CA72008F516B /* Net */ = {
+			isa = PBXGroup;
+			children = (
+				389F978516C91494004D9562 /* BackPropagationNeuralNet.cpp */,
+				389F978616C91494004D9562 /* BackPropagationNeuralNet.h */,
+				08F2E54E16F5BF7C003E1413 /* sigmoids.h */,
+				389F978216C91459004D9562 /* NeuralNetHandler.h */,
+				389F978316C91459004D9562 /* NeuralNetHandler.mm */,
+				38E2502116CABFF000F1CB70 /* InOutDataset.h */,
+				38E2502216CABFF000F1CB70 /* InOutDataset.m */,
+				38E2502416CB9EF000F1CB70 /* NeuralNetTestImage.h */,
+				38E2502516CB9EF000F1CB70 /* NeuralNetTestImage.mm */,
+				386D7C0E16F5C848008F516B /* ImageHelper.h */,
+				386D7C0F16F5C848008F516B /* ImageHelper.m */,
+			);
+			name = Net;
+			sourceTree = "<group>";
+		};
 		389F975316C9131D004D9562 = {
 			isa = PBXGroup;
 			children = (
@@ -136,9 +159,7 @@
 		389F976516C9131D004D9562 /* BackpropagationNeuralNet */ = {
 			isa = PBXGroup;
 			children = (
-				389F978516C91494004D9562 /* BackPropagationNeuralNet.cpp */,
-				389F978616C91494004D9562 /* BackPropagationNeuralNet.h */,
-				08F2E54E16F5BF7C003E1413 /* sigmoids.h */,
+				386D7C1316F5CA72008F516B /* Net */,
 				389F976E16C9131D004D9562 /* AppDelegate.h */,
 				389F976F16C9131D004D9562 /* AppDelegate.m */,
 				389F977716C9131D004D9562 /* ViewController.h */,
@@ -153,12 +174,6 @@
 				383C537016F4860B004BF9F6 /* MainMenuCustomCell.m */,
 				383C537116F4860B004BF9F6 /* MainMenuCustomCell.xib */,
 				389F976616C9131D004D9562 /* Supporting Files */,
-				389F978216C91459004D9562 /* NeuralNetHandler.h */,
-				389F978316C91459004D9562 /* NeuralNetHandler.mm */,
-				38E2502116CABFF000F1CB70 /* InOutDataset.h */,
-				38E2502216CABFF000F1CB70 /* InOutDataset.m */,
-				38E2502416CB9EF000F1CB70 /* NeuralNetTestImage.h */,
-				38E2502516CB9EF000F1CB70 /* NeuralNetTestImage.mm */,
 			);
 			path = BackpropagationNeuralNet;
 			sourceTree = "<group>";
@@ -166,6 +181,7 @@
 		389F976616C9131D004D9562 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				386D7C1116F5CA5F008F516B /* 500.png */,
 				389F976716C9131D004D9562 /* BackpropagationNeuralNet-Info.plist */,
 				389F976816C9131D004D9562 /* InfoPlist.strings */,
 				389F976B16C9131D004D9562 /* main.m */,
@@ -235,6 +251,7 @@
 				389F977C16C9131D004D9562 /* ViewController.xib in Resources */,
 				383C537316F4860B004BF9F6 /* MainMenuViewController.xib in Resources */,
 				383C537516F4860B004BF9F6 /* MainMenuCustomCell.xib in Resources */,
+				386D7C1216F5CA5F008F516B /* 500.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +275,7 @@
 				383C536B16F485E0004BF9F6 /* MainNavigationViewController.m in Sources */,
 				383C537216F4860B004BF9F6 /* MainMenuViewController.m in Sources */,
 				383C537416F4860B004BF9F6 /* MainMenuCustomCell.m in Sources */,
+				386D7C1016F5C848008F516B /* ImageHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

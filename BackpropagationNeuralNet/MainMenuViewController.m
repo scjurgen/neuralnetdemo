@@ -43,8 +43,8 @@ typedef enum
 
 - (void)viewDidLoad
 {
-    menuKeys=@[@"1 in 1 out", @"1 in 2 out", @"2 in 1 out", @"2 in 2 out"];
-    menuIcons=@[@"vguide_over",@"vguide_over",@"vguide_over",@"vguide_over"];
+    menuKeys=@[@"1 in 1 out", @"1 in 2 out", @"2 in 1 out"];
+    menuIcons=@[@"1in1out",@"1in2out",@"2in1out"];
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"NN",@"NN item");
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"menu",@"menu") style:UIBarButtonItemStyleBordered target:self.viewDeckController action:@selector(toggleLeftView)];

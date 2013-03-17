@@ -15,5 +15,6 @@ typedef enum {
     SIG_TANHC,
 }SIG_SIGMOID;
 
+#define SIGMOIDASSTRING(a) (((a)==SIG_EXP)?"exp":(((a)==SIG_TANH)?"tanh":"tanhc"))
 
 #endif

@@ -141,12 +141,83 @@
 }
 
 
+-(float)distance:(CGPoint)a to:(CGPoint)to
+{
+    float x=(a.x-to.x);
+    float y=(a.y-to.y);
+    return sqrt(x*x+y*y);
+}
+
+- (float)getMinDistance:(CGPoint)pt pts:(CGPoint*)pts lastPoint:(int)lastPoint
+{
+    if (!lastPoint)
+        return [self distance:pt to:pt];
+    float minDt=[self distance:pt to:pts[0]];
+    for (int i=1; i < lastPoint; i++)
+    {
+        float nDt=[self distance:pt to:pts[i]];
+        if (nDt < minDt)
+            minDt=nDt;
+    }
+    return minDt;
+}
+
+#define MAXPOINTS 1000
+
+-(NSMutableString *)testSet2In1Out
+{
+    CGPoint points[MAXPOINTS];
+    int lastPoint=0;
+    NSMutableString *testData=[[NSMutableString alloc]init];
+    float sine1=[_sine1Label.text floatValue];
+    float sine2=[_sine2Label.text floatValue];
+    BOOL clipValues=[_clipValues isOn];
+    
+    float facx=3.1415926535897931*sine1;
+    float facy=3.1415926535897931*sine2;
+    float scale=0.6;
+    float yscale=0.0;
+    float step=0.02;
+    float a,x,y;
+    for (a=-1.0; a < 1.0+step; a+=step)
+    {
+        x=(sin(a * facx)+yscale)/(scale*2.0);
+        y=(cos(a * facy)+yscale)/(scale*2.0);
+        if (clipValues)
+        {
+            x=[self clipValue:x];
+            y=[self clipValue:y];
+        }
+        points[lastPoint++]=CGPointMake(x,y);
+        [testData appendFormat:@"%1f,%1f,%1f\n",x,y,1.0];
+    }
+    // shoot and find dot's outside
+    
+    for (int i=0; i < 250; i++)
+    {
+        x=((float)rand()/RAND_MAX)*2.0-1.0;
+        y=((float)rand()/RAND_MAX)*2.0-1.0;
+        float delta=[self getMinDistance:CGPointMake(x,y) pts:points lastPoint:lastPoint];
+        if (delta > 0.1)
+        {
+            points[lastPoint++]=CGPointMake(x,y);
+            [testData appendFormat:@"%1f,%1f,%1f\n",x,y,-1.0];
+        }
+    }
+    return testData;
+}
+
+
 - (IBAction)resetSimulationData:(id)sender {
     NSMutableString *testData=[[NSMutableString alloc]init];
     float sine1=[_sine1Label.text floatValue];
     float sine2=[_sine2Label.text floatValue];
     BOOL clipValues=[_clipValues isOn];
     
+    if (_neuronsIn==2 && _neuronsOut==1)
+    {
+        testData = [self testSet2In1Out];
+     }
     if (_neuronsIn==1 && _neuronsOut==2)
     {
         float facx=3.1415926535897931*sine1;
@@ -155,7 +226,7 @@
         float yscale=0.0;
         float step=0.1;
         float a,x,y;
-        for (a=-1.0; a <= 1.0; a+=step)
+        for (a=-1.0; a < 1.0+step; a+=step)
         {
             x=(sin(a * facx)+yscale)/(scale*2.0);
             y=(cos(a * facy)+yscale)/(scale*2.0);
@@ -166,15 +237,6 @@
             }
             [testData appendFormat:@"%1f,%1f,%1f\n",a,x,y];
         }
-        a=1.0;
-        if (clipValues)
-        {
-       	 	x = (sin(a * facx)+yscale)/(scale*2.0);
-        	y =(cos(a * facy)+yscale)/(scale*2.0);
-        }
-        x=[self clipValue:x];
-        y=[self clipValue:y];
-        [testData appendFormat:@"%1f,%1f,%1f\n",a,x,y];
     }
     if (_neuronsIn==1 && _neuronsOut==1)
     {
@@ -183,18 +245,13 @@
         float yscale=0.0;
         float step=0.1;
         float a,x;
-        for (a=-1.0; a <= 1.0; a+=step)
+        for (a=-1.0; a < 1.0+step; a+=step)
         {
             x=(sin(a * facx)+yscale)/(scale*2.0);
             if (clipValues)
 	            x=[self clipValue:x];
             [testData appendFormat:@"%1f,%1f\n",a,x];
         }
-        a=1.0;
-        x = (sin(a * facx)+yscale)/(scale*2.0);
-        if (clipValues)
-        	x=[self clipValue:x];
-        [testData appendFormat:@"%1f,%1f\n",a,x];
     }
     _dataSet.text=testData;
     

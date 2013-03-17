@@ -7,6 +7,8 @@
 //
 
 #import "NeuralNetTestImage.h"
+#import "ImageHelper.h"
+
 @interface NeuralNetTestImage()
 {
     CGFloat padding;
@@ -52,7 +54,7 @@
 {
     CGFloat oldy=0,oldx=0;
     BOOL first=YES;
-   for (CGFloat x=-width; x < width; x+=2.0)
+    for (CGFloat x=-width; x < width; x+=2.0)
     {
         float inData[2];
         inData[0]=(float)x/(float)width;
@@ -89,25 +91,103 @@
     }
 }
 
--(void)imageTest2x1
+
+-(UIImage*)imageTest2x1
 {
-    CGFloat oldy=0,oldx=0;
-    for (CGFloat y=-height; y < height; y+=10)
+    CFTimeInterval start= CACurrentMediaTime();
+    UIImage *image = [UIImage imageNamed:@"500"];
+	// Create a bitmap
+	unsigned char *bitmap = [ImageHelper convertUIImageToBitmapRGBA8:image];
+    // Create a UIImage using the bitmap
+	
+    for (int y=0; y < image.size.height;y++)
     {
-        for (CGFloat x=-width; x < width; x+=10)
+        unsigned char *scanLine=&bitmap[y*(int)image.size.width*4];
+        for (int x=0; x < image.size.width;x++)
         {
-            FP_TYPE inData[3];
-            inData[0]=(float)x/(float)width;
-            inData[1]=(float)y/(float)height;
+            float inData[2];
+            inData[0]=((float)x/(float)width)*2.0-1.0;
+            inData[1]=((float)y/(float)height)*2.0-1.0;
             [nnh feedForward:inData];
-            //CGFloat z=NORMALIZEHEIGHT([nnh outValue:0]);
-            CGPoint ptFrom={oldx,oldy};
-            CGPoint ptTo={x,y};
-            [self pLine:ptFrom ptTo:ptTo factor:1 lineWidth:1.5];
-            oldx=x;
-            oldy=y;
+            float y = [nnh outValue:0];
+            if (y < 0)
+            {
+                y=-y;
+                y*=100;
+                scanLine[1]+=y;
+               
+            }
+            else
+            {
+                y*=100;
+                scanLine[0]+=y;
+            }
+            scanLine+=4;
         }
     }
+    for (int i=0; i < [[nnh trainDataSet] setsCount]; i++)
+    {
+        int x=NORMALIZEWIDTH([[nnh trainDataSet] dataToInputSet:i][0]);
+        int y=NORMALIZEHEIGHT([[nnh trainDataSet] dataToInputSet:i][1]);
+        int v=[[nnh trainDataSet] dataToOutputSet:i][0];
+
+        if ((x >= 1)&&(x < image.size.width-1)&&(y >= 1)&&(x < image.size.height-1))
+        {
+            unsigned char *scanLine=&bitmap[(x-1+(y-1)*(int)image.size.width)*4];
+            for (int i=0; i < 3; i++)
+            {
+                scanLine[0]=0;
+                scanLine[1]=0;
+                scanLine[2]=0;
+                scanLine+=4;
+            }
+            scanLine=&bitmap[(x-1+(y+1)*(int)image.size.width)*4];
+            for (int i=0; i < 3; i++)
+            {
+                scanLine[0]=0;
+                scanLine[1]=0;
+                scanLine[2]=0;
+                scanLine+=4;
+            }
+            scanLine=&bitmap[(x+y*(int)image.size.width)*4];
+            if (v==1)
+            {
+            
+                scanLine[0-4]=0;
+                scanLine[1-4]=0;
+                scanLine[2-4]=0;
+                scanLine[0]=255;
+                scanLine[1]=0;
+                scanLine[2]=0;
+                scanLine[0+4]=0;
+                scanLine[1+4]=0;
+                scanLine[2+4]=0;
+            }
+            else
+            {
+                scanLine[0-4]=0;
+                scanLine[1-4]=0;
+                scanLine[2-4]=0;
+                scanLine[0]=0;
+                scanLine[1]=255;
+                scanLine[2]=0;
+                scanLine[0+4]=0;
+                scanLine[1+4]=0;
+                scanLine[2+4]=0;
+            }
+        }
+    }
+    
+    
+	UIImage *imageCopy = [ImageHelper convertBitmapRGBA8ToUIImage:bitmap withWidth:image.size.width withHeight:image.size.height];
+	// Cleanup
+	if(bitmap) {
+		free(bitmap);
+		bitmap = nil;
+	}
+    NSLog(@"t for image=%f", CACurrentMediaTime()-start);
+
+	return imageCopy;
 }
 
 -(void)imageTrain1x1
@@ -120,7 +200,6 @@
         CGPoint ptTo={x,y+1};
         [self pLine:ptFrom ptTo:ptTo factor:1 lineWidth:5.0];
     }
-    
 }
 
 
@@ -145,10 +224,16 @@
 
 -(UIImage*)getTestImage:(NeuralNetHandler *)nnhin
 {
+   
     width = 500.0;
     height = 500.0;
     padding = 4.0;
     nnh=nnhin;
+    if(2==[[nnhin trainDataSet] inputNeurons])
+    {
+        return [self imageTest2x1];
+    }
+    
     UIImage *_image;
     CGRect rect = CGRectMake(0.0f, 0.0f, width+padding*2.0, height+padding*2.0);
     UIGraphicsBeginImageContext(rect.size);

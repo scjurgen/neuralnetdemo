@@ -11,6 +11,7 @@
 #include <time.h>
 
 #define SECONDSWAIT .05
+#define SECONDSWAITSLOW 1.2
 #define MAXLAYERS 6
 
 
@@ -77,6 +78,7 @@
 {
     if (neuralNet)
         delete neuralNet;
+    neuralNet=nil;
     neuralNet = new NeuralNet(layersCount, realLayers, _learningRate, _momentum);
     neuralNet->setSigFunc(_sigmoid);
 }
@@ -108,7 +110,6 @@
 
 - (void)train
 {
-    
     if (!neuralNet)
         [self initializeNeuralNet];
     if (_trainDataSet==nil)
@@ -139,7 +140,10 @@
             if (CACurrentMediaTime() >= showTime)
             {
                 [_delegate showProgress:[self currentError] iterations:i];
-                showTime=CACurrentMediaTime()+SECONDSWAIT;
+                if (realLayers[0]==1)
+                    showTime=CACurrentMediaTime()+SECONDSWAIT;
+                else
+                    showTime=CACurrentMediaTime()+SECONDSWAITSLOW;
                 iterationDelta = i-lastDelta; // relaxed checkback on data
                 lastDelta=i;
                 testResultShow++;
