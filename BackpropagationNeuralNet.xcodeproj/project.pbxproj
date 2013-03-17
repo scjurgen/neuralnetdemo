@@ -54,8 +54,12 @@
 		386D7C0E16F5C848008F516B /* ImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHelper.h; sourceTree = "<group>"; };
 		386D7C0F16F5C848008F516B /* ImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHelper.m; sourceTree = "<group>"; };
 		386D7C1116F5CA5F008F516B /* 500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 500.png; sourceTree = "<group>"; };
-		386D7C1416F61975008F516B /* iOS Simulator Screen shot Mar 17, 2013 4.30.38 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iOS Simulator Screen shot Mar 17, 2013 4.30.38 PM.png"; sourceTree = "<group>"; };
-		386D7C1516F61975008F516B /* iOS Simulator Screen shot Mar 17, 2013 4.30.40 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iOS Simulator Screen shot Mar 17, 2013 4.30.40 PM.png"; sourceTree = "<group>"; };
+		386D7C1616F620F6008F516B /* example2set1in2out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = example2set1in2out.png; sourceTree = "<group>"; };
+		386D7C1716F620F6008F516B /* examplemenuopen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = examplemenuopen.png; sourceTree = "<group>"; };
+		386D7C1816F620F6008F516B /* exampleset1in1out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleset1in1out.png; sourceTree = "<group>"; };
+		386D7C1916F620F7008F516B /* exampleset1in2out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleset1in2out.png; sourceTree = "<group>"; };
+		386D7C1A16F620F7008F516B /* exampleset2in1out_v.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleset2in1out_v.png; sourceTree = "<group>"; };
+		386D7C1B16F620F7008F516B /* exampleset2in1out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = exampleset2in1out.png; sourceTree = "<group>"; };
 		389F975C16C9131D004D9562 /* BackpropagationNeuralNet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackpropagationNeuralNet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		389F975F16C9131D004D9562 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		389F976116C9131D004D9562 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -132,8 +136,12 @@
 		389F975316C9131D004D9562 = {
 			isa = PBXGroup;
 			children = (
-				386D7C1416F61975008F516B /* iOS Simulator Screen shot Mar 17, 2013 4.30.38 PM.png */,
-				386D7C1516F61975008F516B /* iOS Simulator Screen shot Mar 17, 2013 4.30.40 PM.png */,
+				386D7C1616F620F6008F516B /* example2set1in2out.png */,
+				386D7C1716F620F6008F516B /* examplemenuopen.png */,
+				386D7C1816F620F6008F516B /* exampleset1in1out.png */,
+				386D7C1916F620F7008F516B /* exampleset1in2out.png */,
+				386D7C1A16F620F7008F516B /* exampleset2in1out_v.png */,
+				386D7C1B16F620F7008F516B /* exampleset2in1out.png */,
 				383880C316F07CC400F49E37 /* ViewDeck */,
 				389F978A16C94DA6004D9562 /* QuartzCore.framework */,
 				389F976516C9131D004D9562 /* BackpropagationNeuralNet */,
