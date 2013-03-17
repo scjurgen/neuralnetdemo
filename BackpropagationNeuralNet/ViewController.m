@@ -14,6 +14,7 @@
 {
     NeuralNetTestImage *testImage;
     NeuralNetHandler *neuralNet;
+    SIG_SIGMOID sigmoid;
     
 }
 @end
@@ -24,6 +25,7 @@
 {
     [super viewDidLoad];
     [self resetSimulationData:self];
+    sigmoid=SIG_TANHC;
     testImage = [[NeuralNetTestImage alloc]init];
 }
 
@@ -31,6 +33,7 @@
 {
     _inputNeurons.text = [NSString stringWithFormat:@"%d", _neuronsIn];
     _outputNeurons.text = [NSString stringWithFormat:@"%d", _neuronsOut];
+    [_sigmoidControl setSelectedSegmentIndex:sigmoid];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +74,7 @@
     [neuralNet setLearningRate:[_learningRate.text floatValue]];
     [neuralNet setMomentum:[_momentum.text floatValue]];
     [neuralNet setRandomSeed:[_randomSeed.text integerValue]];
+    [neuralNet setSigmoid:sigmoid];
     neuralNet.delegate=self;
     dispatch_queue_t queue= dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND,0);
     dispatch_async(queue, ^{
@@ -195,6 +199,9 @@
     _dataSet.text=testData;
     
 }
+
 - (IBAction)sigmoidSelect:(id)sender {
+    sigmoid=_sigmoidControl.selectedSegmentIndex;
 }
+
 @end
